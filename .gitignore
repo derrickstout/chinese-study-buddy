@@ -1,6 +1,9 @@
-Chinese\ Study\ Texts/
-Pleco\ Exports/
-Simplified\ English/
+Chinese Study Texts/
+Pleco Exports/
+Simplified English/
+__pycache__/
+Character Learning Data/
 translate_prompt.txt
 allowed_chars.json
 Dashboard_stats.txt
+.DS_Store
