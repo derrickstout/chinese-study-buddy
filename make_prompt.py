@@ -16,7 +16,7 @@ ALLOWED = BASE / "allowed_chars.json"
 STORY_DIR = BASE / "Simplified English"
 OUT = BASE / "translate_prompt.txt"
 
-TEMPLATE = """You are translating an English story into Traditional Chinese for a learner
+TEMPLATE = """You are translating an English story into Traditional Chinese (with the exception of proper nouns, acronyms, and quotes) for a learner
 who knows only some characters. Translation quality matters most: keep the
 meaning, the events, and the tone of the story. Follow the character
 guidance as closely as you can without hurting the meaning.
@@ -28,21 +28,22 @@ Preferred new characters: {{UNKNOWN_POOL}}
 Not restricted: digits, punctuation, spaces, emoji.
 
 GUIDANCE
-1. Write in Traditional characters, not simplified.
-2. Prefer Mastered and Learning characters.
-3. If an important idea cannot be written with them (for example an animal
+1. DO NOT TRANSLATE proper nouns, acronyms, and quotes. Keep these in English.
+2. Write in Traditional characters, not simplified.
+3. Prefer Mastered and Learning characters.
+4. If an important idea cannot be written with them (for example an animal
    or object in the story), use a new character. Choose from the preferred
    list first. If it has nothing suitable, you may use any other character.
-4. Use at most 10 different new characters in total, meaning characters that
+5. Use at most 50 different new characters in total, meaning characters that
    are not in the Mastered or Learning lists. Fewer is better. There is no
    minimum. Where it reads naturally, reuse a new character so the learner
    sees it more than once.
-5. Keep the grammar simple and natural.
+6. Keep the grammar simple and natural.
 
-OUTPUT FORMAT (The full translation in traditional Chinese only, NOTES is in English)
-{the full translation}
+OUTPUT FORMAT
+{The full translation, adhering to the rules above}
 NOTES: anything you simplified or changed because of the new-character
-limit, or "none"
+limit, or "none" IN ENGLISH
 
 STORY
 {{STORY}}

@@ -7,3 +7,5 @@ translate_prompt.txt
 allowed_chars.json
 Dashboard_stats.txt
 .DS_Store
+config.json
+Prompts/
