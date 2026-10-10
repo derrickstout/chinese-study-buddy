@@ -122,7 +122,9 @@ def llm_chat(cfg, prompt, text=None, max_tokens=None):
         "ttl": cfg.get("llm_ttl", 600),            # unload the model after this many idle seconds
         "messages": messages,
     }
-    body.update(cfg.get("llm_extra", {}))          # any extra request settings, e.g. to switch off thinking
+    if cfg.get("reasoning_effort"):                # e.g. "none" to switch thinking off in LM Studio
+        body["reasoning_effort"] = cfg["reasoning_effort"]
+    body.update(cfg.get("llm_extra", {}))          # any other extra request settings
     started = time.time()
     try:
         r = llm_request(cfg, "/chat/completions", body, timeout=cfg.get("llm_timeout", 900))
@@ -165,6 +167,8 @@ def test_llm(cfg):
         body = {"model": model, "temperature": 0, "max_tokens": 300,
                 "ttl": cfg.get("llm_ttl", 600),
                 "messages": [{"role": "user", "content": question}]}
+        if cfg.get("reasoning_effort"):
+            body["reasoning_effort"] = cfg["reasoning_effort"]
         body.update(cfg.get("llm_extra", {}))
         r = llm_request(cfg, "/chat/completions", body)
         choice = r["choices"][0]
